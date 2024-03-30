@@ -1,0 +1,11 @@
+{
+	"appId": "defted.svelectro",
+	"productName": "defted svelectro",
+	"directories": {
+		"output": "dist_electron"
+	},
+	"win": {
+		"target": "nsis",
+		"icon": "src/icon/gino.ico"
+	}
+}
