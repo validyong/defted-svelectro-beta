@@ -3,11 +3,11 @@
   export let onClick = () => { };
 </script>
 
-<button class="px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 transition duration-300 ease-in-out"
+
+<button
+  class="flex items-center justify-center px-4 py-2 bg-primary-500 text-white font-bold rounded hover:bg-blue-700 transition duration-300 ease-in-out"
   on:click={onClick}>
-  {label}
-
-
+  <slot></slot>
 </button>
 
 <style>

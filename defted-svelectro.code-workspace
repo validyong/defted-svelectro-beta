@@ -10,7 +10,7 @@
 	"settings": {
 		"editor.defaultFormatter": "biomejs.biome",
 		"json.format.enable": false,
-		"prettier.enable": false,
+		"prettier.enable": true,
 		"[jsonc]": {
 			"editor.defaultFormatter": "biomejs.biome"
 		},
@@ -131,10 +131,22 @@
 			"zIndex"
 		],
 		"files.associations": {
-			"*.svelte": "html"
+			"*.svelte": "svelte"
 		},
 		"[html]": {
 			"editor.defaultFormatter": "vscode.html-language-features"
-		}
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[json]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[svelte]": {
+			"editor.defaultFormatter": "svelte.svelte-vscode"
+		},
+		"svelte.enable-ts-plugin": true,
+		"svelte.plugin.svelte.format.enable": false,
+		"svelte.language-server.ls-path": ""
 	}
 }

@@ -1,3 +1,4 @@
+import type { Guild } from "@svelectro/types";
 import Store from "electron-store";
 
 interface StoreSchema {

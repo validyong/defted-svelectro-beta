@@ -7,7 +7,9 @@
 // Read more: https://www.electronjs.org/docs/latest/tutorial/tutorial-preload
 console.log("preload.ts is loaded");
 
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer, shell } from "electron";
+import type { ProtocolData } from "./types/types";
+import type { Guild } from "@svelectro/types";
 
 interface RefreshLoLAuthResponse {
 	success: boolean;
@@ -23,15 +25,44 @@ contextBridge.exposeInMainWorld("electronAPI", {
 	requestProcessVersions: async () => {
 		return await ipcRenderer.invoke("renderer:requestProcessVersions");
 	},
+	openExternal: async (url: string) =>
+		await ipcRenderer.invoke("open-external", url),
 	refreshLoLAuth: async () => {
-		console.log("refreshLoLAuth is called");
 		return await ipcRenderer.invoke("refresh-lol-auth");
+	},
+	getIsPackaged: () => {
+		return ipcRenderer.invoke("get-app-isPackaged");
 	},
 	onRefreshLoLAuthResponse: (callback: RefreshLoLAuthCallback) => {
 		ipcRenderer.on("refresh-lol-auth-response", (event, response) =>
 			callback(response),
 		);
 	},
+	getCookies: async (url: string) => {
+		return await ipcRenderer.invoke("get-cookies", url);
+	},
+	getAuthData: async () => await ipcRenderer.invoke("get-auth-data"),
+	onProtocolData: (callback: (data: ProtocolData) => void) =>
+		ipcRenderer.on("protocol-data", (event, data) => callback(data)),
+	getCustomProtocolData: async () => {
+		const t = await ipcRenderer.invoke("get-custom-protocol-data");
+		console.log("cus pro dat", JSON.stringify(t));
+		return await ipcRenderer.invoke("get-custom-protocol-data");
+	},
+	getTest: () => {
+		"test";
+	},
+
+	syncLolMatchHistory: async (guildId: string) =>
+		await ipcRenderer.invoke("sync-lol-match-history"),
+	requestLolMatchHistory: async () =>
+		await ipcRenderer.invoke("request-lol-match-history"),
+
+	requestLolGame: async (gameId: string) =>
+		await ipcRenderer.invoke("request-game"),
+
+	setGuild: (guild: Guild) => ipcRenderer.invoke("set-guild", guild),
+	fetchGuild: () => ipcRenderer.invoke("get-guild"),
 });
 console.log("electronAPI is exposed");
 

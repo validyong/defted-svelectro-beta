@@ -1,6 +1,8 @@
 $processInfo = Get-WmiObject Win32_Process -Filter "name = 'LeagueClientUx.exe'"
 $commandLine = $processInfo.CommandLine
 
+echo $commandLine
+
 $appPortRegex = "--app-port=(\d+)"
 $authTokenRegex = "--remoting-auth-token=([a-zA-Z0-9]+)"
 

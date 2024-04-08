@@ -1,5 +1,4 @@
 {
-	"prettier.documentSelectors": ["**/*.svelte"],
 	"tailwindCSS.classAttributes": [
 		"class",
 		"accent",
@@ -114,5 +113,29 @@
 		"transition",
 		"width",
 		"zIndex"
-	]
+	],
+	"files.associations": {
+		"*.svelte": "svelte"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"svelte.enable-ts-plugin": true,
+	"svelte.plugin.svelte.format.enable": false,
+	"svelte.language-server.ls-path": "",
+	"prettier.enable": false,
+	"editor.defaultFormatter": "biomejs.biome",
+	"json.format.enable": false,
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[svelte]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 }

@@ -1,7 +1,15 @@
-export interface Root {
+export interface MatchHistory {
 	accountId: number;
 	games: Games;
 	platformId: string;
+}
+
+export interface Matchset {
+	id: number;
+	gameId: number;
+	gameCreation: number;
+	guildId: string;
+	game: Game;
 }
 
 export interface Games {
@@ -207,3 +215,96 @@ export interface Team {
 	vilemawKills: number;
 	win: string;
 }
+
+export interface ChampionData {
+	type: string;
+	format: string;
+	version: string;
+	data: {
+		[key: string]: {
+			id: string;
+			key: string;
+			name: string;
+			title: string;
+			blurb: string;
+			info: {
+				attack: number;
+				defense: number;
+				magic: number;
+				difficulty: number;
+			};
+			image: object;
+			tags: [];
+			partype: string;
+			stats: string;
+		};
+	};
+}
+
+export interface SummonerAllInfo {
+	account: Account;
+	summoner?: Summoner;
+	championMasteries: ChampionMastery[];
+	leagueEntries: LeagueEntry[];
+	masteryByRole?: Record<string, number>;
+}
+
+export interface Account {
+	puuid: string;
+	gameName: string;
+	tagLine: string;
+}
+export interface Summoner {
+	id: string;
+	accountId: string;
+	puuid: string;
+	name: string;
+	profileIconId: number;
+	revisionDate: bigint;
+	summonerLevel: number;
+}
+
+export interface ChampionMastery {
+	puuid: string;
+	championId: number;
+	championLevel: number;
+	championPoints: number;
+	lastPlayTime: number;
+	championPointsSinceLastLevel: number;
+	championPointsUntilNextLevel: number;
+	chestGranted: boolean;
+	tokensEarned: number;
+	summonerId: string;
+}
+
+export interface LeagueEntry {
+	leagueId: string;
+	summonerId: string; //	Player's encrypted summonerId.
+	summonerName: string;
+	queueType: string;
+	tier: string;
+	rank: string; //	The player's division within a tier.
+	leaguePoints: number;
+	wins: number; //	Winning team on Summoners Rift.
+	losses: number; // Losing team on Summoners Rift.
+	hotStreak: boolean | null;
+	veteran: boolean | null;
+	freshBlood: boolean;
+	inactive: boolean;
+	miniSeries: MiniSeries | null;
+}
+
+export interface MiniSeries {
+	losses: number;
+	progress: string;
+	target: number;
+	wins: number;
+}
+
+export type ChampionTag =
+	| "Fighter"
+	| "Tank"
+	| "Mage"
+	| "Assassin"
+	| "Support"
+	| "Marksman";

@@ -1,0 +1,9 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
+	"formatter": {
+		"ignore": ["node_modules", "**/*.svelte"]
+	},
+	"linter": {
+		"ignore": ["node_modules", "**/*.svelte"]
+	}
+}

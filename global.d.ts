@@ -19,4 +19,4 @@ declare global {
 	type ProcessVersions = NodeJS.ProcessVersions;
 }
 
-export {};
+export type {};

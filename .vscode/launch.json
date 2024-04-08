@@ -2,6 +2,35 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Debug Electron Main Process",
+			"type": "pwa-node",
+			"request": "launch",
+			"program": "${workspaceFolder}/src/main.ts",
+			"preLaunchTask": "Start Development",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+			"outFiles": ["${workspaceFolder}/dist/**/*.js"],
+			"console": "integratedTerminal"
+		},
+		{
+			"name": "Debug Electron Main Process",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/src/main.ts",
+			"preLaunchTask": "Start Electron",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+			"outFiles": ["${workspaceFolder}/dist/**/*.js"],
+			"console": "integratedTerminal"
+		},
+		{
+			"name": "Debug Electron Main Process",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/.bin/electron",
+			"args": ["."],
+			"preLaunchTask": "Start Electron and Vite",
+			"outFiles": ["${workspaceFolder}/dist/**/*.js"]
+		},
+		{
 			"name": "Debug Main Process",
 			"type": "pwa-node",
 			"request": "launch",

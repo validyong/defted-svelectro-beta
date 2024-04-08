@@ -45,3 +45,42 @@ export function executePowershellScript(): Promise<void> {
 		);
 	});
 }
+
+export function fetchAndStoreLoLClientInfo() {
+	// Windows Management Instrumentation Command-line (WMIC) を使用してLoLクライアントのコマンドライン引数を取得
+	const command =
+		"WMIC PROCESS WHERE \"Name='LeagueClientUx.exe'\" GET CommandLine";
+
+	exec(command, (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return;
+		}
+		if (stderr) {
+			console.error(`stderr: ${stderr}`);
+			return;
+		}
+
+		// コマンドライン引数からapp portとauth tokenを抽出
+		const appPortRegex = /--app-port=(\d+)/;
+		const authTokenRegex = /--remoting-auth-token=([a-zA-Z0-9_\-]+)/;
+
+		const appPortMatch = stdout.match(appPortRegex);
+		const authTokenMatch = stdout.match(authTokenRegex);
+
+		if (appPortMatch) {
+			console.log(`App Port: ${appPortMatch[1]}`);
+			lolStore.set("port", appPortMatch[1]);
+		}
+
+		if (authTokenMatch) {
+			console.log(`Auth Token: ${authTokenMatch[1]}`);
+			const authInfo = `riot:${authTokenMatch[1]}`;
+			const encodedAuthInfo = Buffer.from(authInfo).toString("base64");
+			console.log(`Encoded Auth Info: ${encodedAuthInfo}`);
+			lolStore.set("token", encodedAuthInfo);
+		} else {
+			console.log("Auth Token was not found.");
+		}
+	});
+}
